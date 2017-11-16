@@ -165,11 +165,75 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		 * Get Locations.
 		 *
 		 * @access public
-		 * @param mixed $conditions Conditions.
+		 * @param  int $location_id ID of location.
 		 * @return void
 		 */
 		public function get_locations( $args = array() ) {
 			return $this->build_request( 'locations', $args )->fetch();
+		}
+		
+		/**
+		 * Get Location Events.
+		 *
+		 * @access public
+		 * @param  int $location_id ID of location.
+		 * @return void
+		 */
+		public function get_location_events( $location_id ) {
+			return $this->build_request( "locations/$location_id/events" )->fetch();
+		}
+		
+		/**
+		 * Get Location Menus.
+		 *
+		 * @access public
+		 * @param  int $location_id ID of location.
+		 * @return void
+		 */
+		public function get_location_menus( $location_id ) {
+			return $this->build_request( "locations/$location_id/menus" )->fetch();
+		}
+		
+		/**
+		 * Get Menu Sections.
+		 *
+		 * @access public
+		 * @param  int    $menu_id                 ID of menu.
+		 * @param  bool   $include_on_deck_section Set to true to show on deck section in results.
+		 * @return void
+		 */
+		public function get_menu_sections( $menu_id, bool $include_on_deck_section = null ) {
+			$args = array();
+			
+			if( ! is_null( $include_on_deck_section ) ){
+				$args['include_on_deck_section'] = $include_on_deck_section;
+			}
+			
+			return $this->build_request( "menus/$menu_id/sections", $args )->fetch();
+		}
+		
+		/**
+		 * Get Locations.
+		 *
+		 * @access public
+		 * @param  int    $section_id ID of menu section.
+		 * @return void
+		 */
+		public function get_section( $section_id ) {
+			return $this->build_request( "sections/$section_id"  )->fetch();
+		}
+		
+		/**
+		 * Get Menu Section Items.
+		 *
+		 * (Aka: Get me all the beers )
+		 *
+		 * @access public
+		 * @param  int    $section_id ID of menu section.
+		 * @return void
+		 */
+		public function get_section_items( $section_id ) {
+			return $this->build_request( "sections/$section_id/items"  )->fetch();
 		}
 
 
