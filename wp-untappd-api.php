@@ -40,14 +40,14 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		 *
 		 * @var string
 		 */
-		static private $email;
-		
+		static protected $email;
+
 		/**
 		 * Untappd Site
 		 *
 		 * @var string
 		 */
-		static private $api_token;
+		static protected $api_token;
 
 
 		/**
@@ -171,7 +171,7 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		public function get_locations( $args = array() ) {
 			return $this->build_request( 'locations', $args )->fetch();
 		}
-		
+
 		/**
 		 * Get Location Events.
 		 *
@@ -182,7 +182,7 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		public function get_location_events( $location_id ) {
 			return $this->build_request( "locations/$location_id/events" )->fetch();
 		}
-		
+
 		/**
 		 * Get Location Menus.
 		 *
@@ -193,7 +193,7 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		public function get_location_menus( $location_id ) {
 			return $this->build_request( "locations/$location_id/menus" )->fetch();
 		}
-		
+
 		/**
 		 * Get Menu Sections.
 		 *
@@ -204,14 +204,14 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		 */
 		public function get_menu_sections( $menu_id, bool $include_on_deck_section = null ) {
 			$args = array();
-			
+
 			if( ! is_null( $include_on_deck_section ) ){
 				$args['include_on_deck_section'] = $include_on_deck_section;
 			}
-			
+
 			return $this->build_request( "menus/$menu_id/sections", $args )->fetch();
 		}
-		
+
 		/**
 		 * Get Locations.
 		 *
@@ -222,7 +222,7 @@ if ( ! class_exists( 'WPUntappdAPI' ) ) {
 		public function get_section( $section_id ) {
 			return $this->build_request( "sections/$section_id"  )->fetch();
 		}
-		
+
 		/**
 		 * Get Menu Section Items.
 		 *
